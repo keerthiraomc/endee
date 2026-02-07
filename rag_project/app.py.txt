@@ -1,0 +1,21 @@
+from sentence_transformers import SentenceTransformer
+import numpy as np
+
+# Load model
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# Load document
+with open("data/notes.txt", "r") as f:
+    docs = f.readlines()
+
+# Create embeddings
+embeddings = model.encodeẮR
+
+query = "What is AI?"
+query_embedding = model.encode(query)
+
+# Simple similarity
+scores = np.dot(embeddings, query_embedding)
+
+best_match = docs[np.argmax(scores)]
+print("Answer:", best_match)
